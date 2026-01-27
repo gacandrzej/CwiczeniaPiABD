@@ -1,20 +1,19 @@
-Ćwiczenia 5 -- kopie zapasowe
+# Ćwiczenia 5 - kopie zapasowe
+
 1.  Stwórz dwie bazy w phpMyAdmin z dwiema tabelami, po 4 kolumny, 2
     wiersze danych.
 2.  W shellu utwórz trzecią bazę danych o nazwie biblioteka z jedną
     tabelą o nazwie książki o strukturze jak poniżej. Wypełnij ją danymi
     (minimum 3 rekordy) za pomocą instrukcji INSERT INTO ....
-  -----------------------------------------------------------------------------
-  Nazwa pola       Typ danych        Wartość     Klucz         Inne
-  ---------------- ----------------- ----------- ------------- ----------------
-  id               Int(11)                       PRIMARY KEY   AUTO_INCREMENT
-  autor            TEXT              NOT NULL                  NOT NULL
-  cena             float                                       długość 10 do 2
-                                                               miejsc po
-                                                               przecinku
-  data_sprzedazy   DATE                                        rrrr-MM-dd
-  tytul            VARCHAR           NOT NULL                  długość 90
-  -----------------------------------------------------------------------------
+
+ | Nazwa pola    | Typ danych     | Wartość | Klucz       | Inne             |
+ |------------|----------------|---------|-------------|------------------|
+ |  id       |         Int(11)    |         | PRIMARY KEY | AUTO_INCREMENT   |
+ | autor     |       TEXT         |     NOT NULL    |             NOT NULL |
+ | cena       |      float        |                 |       | długość 10 do 2 miejsc po przecinku|
+  | data_sprzedazy |  DATE         |                |          |     rrrr-MM-dd |
+  |tytul          |  VARCHAR       |    NOT NULL    |         |     długość 90 |
+
 ![](media/image1.png)
 ![](media/image2.png)
 ![](media/image3.png)
@@ -54,10 +53,15 @@ e)  Inna kopia
 12. Zaimportuj bazę danych wykonaną w punkcie 4b w shellu z użyciem
     SOURCE.
 13. Sprawdź poprawność przywrócenia w phpMyAdmin i w shellu.
+
+---
+
+### Ćwiczenia w dniu 27 stycznia 2026r. z klasą 2P grupa 2
+
 14. Utwórz dwóch operatorów kopii zapasowych, którzy mają nadane
     uprawnienia do wykonywania kopii o nazwach **admin** i **admin2**.
     Drugi z operatorów może także przywracać kopie.
-15. Utwórz skrypt dla narzędzia mysqldump.exe, który wykona kopię 4 baz.
+15. Utwórz skrypt dla narzędzi mysqldump.exe oraz mariadb-dump, który wykona kopię 4 baz.
     Sprawdź jego działanie.
 16. Zmodyfikuj skrypt tak, aby w nazwie pliku kopii pojawiała się data i
     czas utworzenia.
@@ -65,6 +69,9 @@ e)  Inna kopia
     cykliczność o zadanych godzinach i dniach.( np. każdego dnia o
     godzinie kiedy masz ćwiczenia z wyjątkiem niedzieli )
 18. Sprawdź poprawność przywrócenia.
+
+---
+
 19. Stwórz bazę w Microsoft SQL Server Management. Następnie wykonaj jej
     kopię. Usuń bazę, a następnie odtwórz dane z kopii.
 20. Utwórz skrypt i z pomocą harmonogramu w Microsoft SQL Server
@@ -82,29 +89,29 @@ e)  Inna kopia
     hurtownia z jedną tabelą magazyn dla użytkownika operator. Wszyscy
     podłączają się do jednej bazy i wprowadzają po 5 rekordów danych do
     tabeli magazyn.
-  -----------------------------------------------------------------------
-  Nazwa pola        Typ danych        Klucz             Inne
-  ----------------- ----------------- ----------------- -----------------
-  ID                Int               PRIMARY KEY       AUTO_INCREMENT
-  produkt           TEXT                                NOT NULL
-  cena              Decimal                             Długość 10 do 2
-                                                        miejsc po
-                                                        przecinku
-  Data_sprzedazy    DATE
-  producent         VARCHAR                             Długość 45
-  -----------------------------------------------------------------------
+
+| Nazwa pola     | Typ danych | Wartość | Klucz       | Inne                                |
+ |----------------|------------|---------|-------------|-------------------------------------|
+| id             | Int(11)    |         | PRIMARY KEY | AUTO_INCREMENT                      |
+| autor          | TEXT       |     NOT NULL    |             NOT NULL |
+| cena           | decimal    |                 |       | długość 10 do 2 miejsc po przecinku |
+| data_sprzedazy | DATE       |                |          | rrrr-MM-dd                          |
+| producent      | VARCHAR    |    NOT NULL    |         | długość 45                           |
 26. Na stacji Ubuntu Desktop zainstaluj oprogramowanie bazy danych
     mariadb:
-    \`\`\`bash
+
+```bash
     sudo apt update
     sudo apt install mariadb-server mariadb-client mc -y
-\`\`\`
+```
 27. Ustaw hasło użytkownika root bazy danych:
+```bash
     sudo mariadb-secure-installation
+```
 28. Stwórz bazę danych z jedną tabelą i 3 rekordami danych.
-29. Z pomocą mariadb-dump wykonaj kopię bazy w katalogu \~/twoje_imię.
+29. Z pomocą mariadb-dump wykonaj kopię bazy w katalogu `~/twoje_imię`.
 30. Sprawdź wyświetlanie daty i czasu komendą date
-31. Utwórz skrypt, który wykona kopię twojej bazy do pliku backup.sql
+31. Utwórz skrypt, który wykona kopię twojej bazy do pliku `backup.sql`
 32. Sprawdź komendę kompresji dla kopii poleceniem tar.
 33. Popraw skrypt, tak aby w nazwie pliku kopii znalazła się data i czas
     jej wykonania, a następnie utwórz archiwum tar.bz2.
