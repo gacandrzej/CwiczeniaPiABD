@@ -61,6 +61,11 @@ load data infile 'import.csv' into table test fields terminated by ';';
 ![](media/image11.png)
 
 9.  Zaimportuj dane do tabeli za pomocą narzędzia **mysqlimport**.
+```sql
+mysqlimport -u root -p magazyn dane
+Enter password:
+magazyn.dane: Records: 1  Deleted: 0  Skipped: 0  Warnings: 0
+```
 10. Usuń stworzone bazy danych.
 11. Zaimportuj dwie bazy XML i JSON.ZIP w _*phpMyAdmin*_.
 12. Zaimportuj bazę danych wykonaną w punkcie 4b w shellu z użyciem
