@@ -4,7 +4,7 @@
     wiersze danych.
 2.  W shellu utwórz trzecią bazę danych o nazwie biblioteka z jedną
     tabelą o nazwie książki o strukturze jak poniżej. Wypełnij ją danymi
-    (minimum 3 rekordy) za pomocą instrukcji INSERT INTO ....
+    (minimum 3 rekordy) za pomocą instrukcji `INSERT INTO` ....
 
  | Nazwa pola    | Typ danych     | Wartość | Klucz       | Inne             |
  |------------|----------------|---------|-------------|------------------|
@@ -17,41 +17,55 @@
 ![](media/image1.png)
 ![](media/image2.png)
 ![](media/image3.png)
+
 3.  Zaimportuj z poziomy phpMyAdmin czwartą bazę udostępnioną z linux
-    lub teams o nazwie kopia.sql.
+    lub teams o nazwie _kopia.sql_.
 4.  Nadać uprawnienia do powyższych baz dla wybranych użytkowników.(po
     punkcie 5 sprawdzić, czy w plikach kopii znajdują się instrukcje
-    GRANT)
+    `GRANT`)
 5.  Wykonaj eksport baz danych:
-<!-- -->
-a)  Jedną wyeksportuj metodą szybko do formatu .**XML**
+
+a)  Jedną wyeksportuj metodą szybko do formatu .**XML**  
 b)  Bazę danych z jedną tabelą metodą dostosuj do formatu .**SQL** i
-    zaznacz opcję \"dodaj oświadczenie create database /use\"
-c)  ![](media/image4.png)
-    Trzecią z wiersza poleceń za pomocą
-    mysqldump ( porównaj wielkości kopii tworzonych opcjami: c, i ,v, l,
-    a, x oraz z opcjami skip\--...)
-> ![](media/image5.png)
-d)  Czwartą wyeksportuj do formatu **JSON** z kompresją zip lub gz.
-e)  Inna kopia
-<!-- -->
+    zaznacz opcję \"dodaj oświadczenie create database /use\"  
+c)  Trzecią z wiersza poleceń za pomocą
+    **mysqldump, mariadb-dump**  
+   ( porównaj wielkości kopii tworzonych opcjami: 
+   - c, i ,v, l, a, x oraz z opcjami skip\--...)
+
+ ![](media/image4.png)
+ ![](media/image5.png)
+
+d)  Czwartą wyeksportuj do formatu **JSON** z kompresją zip lub gz.  
+e)  Inna kopia  
+
 6.  Sprawdź zawartość kopii zapasowych w eksploratorze, załącz okienko
-    podglądu.
+    podglądu.  
+
 ![](media/image6.png)
+
 7.  Wyeksportuj wybraną tabelę w shellu z użyciem SELECT kolumny from
-    *table* INTO OUTFILE *plik*.
+    *table* `INTO OUTFILE` *plik*.
+
 ![](media/image7.png)
 ![](media/image8.png)
-8.  Zaimportuj tabelę z pomocą LOAD DATA INFILE *plik* INTO TABLE
-    *tabela.*
+
+8.  Zaimportuj tabelę z pomocą `LOAD DATA INFILE` *plik* `INTO TABLE`
+    *tabela.*  
+
 ![](media/image9.png)
 ![](media/image10.png)
+```sql
+load data infile 'import.csv' into table test fields terminated by ';';
+```
 ![](media/image11.png)
-9.  Zaimportuj dane do tabeli za pomocą narzędzia mysqlimport.
+
+9.  Zaimportuj dane do tabeli za pomocą narzędzia **mysqlimport**.
 10. Usuń stworzone bazy danych.
-11. Zaimportuj dwie bazy XML i JSON.ZIP w phpMyAdmin.
+11. Zaimportuj dwie bazy XML i JSON.ZIP w _*phpMyAdmin*_.
 12. Zaimportuj bazę danych wykonaną w punkcie 4b w shellu z użyciem
-    SOURCE.
+    `SOURCE`.
+
 13. Sprawdź poprawność przywrócenia w phpMyAdmin i w shellu.
 
 ---
