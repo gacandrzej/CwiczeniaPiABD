@@ -73,10 +73,6 @@ magazyn.dane: Records: 1  Deleted: 0  Skipped: 0  Warnings: 0
 
 13. Sprawdź poprawność przywrócenia w phpMyAdmin i w shellu.
 
----
-
-### Ćwiczenia w dniu 27 stycznia 2026r. z klasą 2P grupa 2
-
 14. Utwórz dwóch operatorów kopii zapasowych, którzy mają nadane
     uprawnienia do wykonywania kopii o nazwach **admin** i **admin2**.
     Drugi z operatorów może także przywracać kopie.
@@ -110,44 +106,41 @@ TIMEOUT /T 60
 ![wyzwalacz.png](media/wyzwalacz.png)  
 ![wyzwalacz2.png](media/wyzwalacz2.png)
 
-18. Na zakładce akcje dodać swój skrypt
+19. Na zakładce akcje dodać swój skrypt
 
 ![akcja.png](media/akcja.png)  
 ![akcja2.png](media/akcja2.png)
 
-19. Sprawdź listę zadań, czy twoje zadanie widnieje 
+20. Sprawdź listę zadań, czy twoje zadanie widnieje 
 
 ![widok_zadan.png](media/widok_zadan.png)
 
-20. Zaczekaj na wykonanie kopii
+21. Zaczekaj na wykonanie kopii
 
 ![cmd_widok_kopii.png](media/cmd_widok_kopii.png)
 
-19. Sprawdź poprawność przywrócenia.
+22. Sprawdź poprawność przywrócenia.
 
 ![eksplorator.png](media/eksplorator.png)
 
-20. Sprawdź poprawność przywrócenia, wcześniej skasuj bazę twoja_baza
+23. Sprawdź poprawność przywrócenia, wcześniej skasuj bazę twoja_baza
 ```bash
 mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 ```
-
----
-
-19. Stwórz bazę w Microsoft SQL Server Management. Następnie wykonaj jej
+24. Stwórz bazę w Microsoft SQL Server Management. Następnie wykonaj jej
     kopię. Usuń bazę, a następnie odtwórz dane z kopii.
-20. Utwórz skrypt i z pomocą harmonogramu w Microsoft SQL Server
+25. Utwórz skrypt i z pomocą harmonogramu w Microsoft SQL Server
     Management (tasks-\>Backup-scripts) zaplanuj wykonanie kopii
     zapasowej. W media options ustawić back up to a new media oraz 3
     pozycje w reliability. W backup options ustaw wygasanie za 2
-    miesiące z kompresją i szyfrowaniem na AES 256.
-21. Sprawdź poprawność przywrócenia.
-22. Stwórz bazę w PgAdmin, następnie wykonaj jej kopię. Usuń bazę, a
-    następnie odtwórz dane z kopii.
-23. Stwórz z pomocą **harmonogramu** i skryptu kopię bazy w postgreSQL,
-    zaplanuj jej cykliczność o zadanych godzinach i dniach.
-24. Sprawdź poprawność przywrócenia.
-25. Na jednym z komputerów udostępnić w systemie linux bazę o nazwie
+    miesiące z kompresją i szyfrowaniem na AES 256. 
+26. Sprawdź poprawność przywrócenia. 
+27. Stwórz bazę w PgAdmin, następnie wykonaj jej kopię. Usuń bazę, a
+    następnie odtwórz dane z kopii. 
+28. Stwórz z pomocą **harmonogramu** i skryptu kopię bazy w postgreSQL,
+    zaplanuj jej cykliczność o zadanych godzinach i dniach. 
+29. Sprawdź poprawność przywrócenia. 
+30. Na jednym z komputerów udostępnić w systemie linux bazę o nazwie
     hurtownia z jedną tabelą magazyn dla użytkownika operator. Wszyscy
     podłączają się do jednej bazy i wprowadzają po 5 rekordów danych do
     tabeli magazyn.
@@ -159,26 +152,28 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 | cena           | decimal    |                 |       | długość 10 do 2 miejsc po przecinku |
 | data_sprzedazy | DATE       |                |          | rrrr-MM-dd                          |
 | producent      | VARCHAR    |    NOT NULL    |         | długość 45                           |
-26. Na stacji Ubuntu Desktop zainstaluj oprogramowanie bazy danych
+
+31. Na stacji Ubuntu Desktop zainstaluj oprogramowanie bazy danych
     mariadb:
 
 ```bash
     sudo apt update
     sudo apt install mariadb-server mariadb-client mc -y
 ```
-27. Ustaw hasło użytkownika root bazy danych:
+32. Ustaw hasło użytkownika root bazy danych:
 ```bash
     sudo mariadb-secure-installation
 ```
-28. Stwórz bazę danych z jedną tabelą i 3 rekordami danych.
-29. Z pomocą mariadb-dump wykonaj kopię bazy w katalogu `~/twoje_imię`.
-30. Sprawdź wyświetlanie daty i czasu komendą date
-31. Utwórz skrypt, który wykona kopię twojej bazy do pliku `backup.sql`
-32. Sprawdź komendę kompresji dla kopii poleceniem tar.
-33. Popraw skrypt, tak aby w nazwie pliku kopii znalazła się data i czas
-    jej wykonania, a następnie utwórz archiwum tar.bz2.
-34. Stwórz z pomocą **CRONTABA** i skryptu kopię, zaplanuj jej
-    cykliczność o zadanych godzinach i dniach.
-35. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
+33. Stwórz bazę danych z jedną tabelą i 3 rekordami danych. 
+34. Z pomocą mariadb-dump wykonaj kopię bazy w katalogu `~/twoje_imię`. 
+35. Sprawdź wyświetlanie daty i czasu komendą date
+36. Utwórz skrypt, który wykona kopię twojej bazy do pliku `backup.sql`
+37. Sprawdź komendę kompresji dla kopii poleceniem tar.
+38. Popraw skrypt, tak aby w nazwie pliku kopii znalazła się data i czas
+    jej wykonania, a następnie utwórz archiwum tar.bz2. 
+39. Stwórz z pomocą **CRONTABA** i skryptu kopię, zaplanuj jej
+    cykliczność o zadanych godzinach i dniach. 
+40. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
     wszyscy wykonują kopię zdalnie i odtwarzają bazę na swoich
     komputerach.
+41. KONIEC. 😀
