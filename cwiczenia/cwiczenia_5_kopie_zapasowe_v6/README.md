@@ -102,19 +102,31 @@ TIMEOUT /T 60
 
 17. Stwórz z pomocą **harmonogramu** i skryptu kopię, zaplanuj jej
     cykliczność co 5 minut ale tylko w dniu ćwiczeń
+
 ![ogolne.png](media/ogolne.png)
+
 18. Na zakładce wyzwalacz wybierz nowy
-![wyzwalacz.png](media/wyzwalacz.png)
+
+![wyzwalacz.png](media/wyzwalacz.png)  
 ![wyzwalacz2.png](media/wyzwalacz2.png)
+
 18. Na zakładce akcje dodać swój skrypt
-![akcja.png](media/akcja.png)
+
+![akcja.png](media/akcja.png)  
 ![akcja2.png](media/akcja2.png)
+
 19. Sprawdź listę zadań, czy twoje zadanie widnieje 
+
 ![widok_zadan.png](media/widok_zadan.png)
+
 20. Zaczekaj na wykonanie kopii
+
 ![cmd_widok_kopii.png](media/cmd_widok_kopii.png)
+
 19. Sprawdź poprawność przywrócenia.
+
 ![eksplorator.png](media/eksplorator.png)
+
 20. Sprawdź poprawność przywrócenia, wcześniej skasuj bazę twoja_baza
 ```bash
 mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
