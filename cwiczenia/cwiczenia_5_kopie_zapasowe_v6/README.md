@@ -84,10 +84,29 @@ magazyn.dane: Records: 1  Deleted: 0  Skipped: 0  Warnings: 0
     Sprawdź jego działanie.
 16. Zmodyfikuj skrypt tak, aby w nazwie pliku kopii pojawiała się data i
     czas utworzenia.
+```bash
+COLOR 0A
+@ECHO OFF
+
+FOR /F "tokens=*" %%i IN ('powershell Get-Date -Format "yyyy-MM-dd_HH-mm"') DO SET data=%%i
+
+ECHO Trwa wykonywanie kopii...
+C:\xampp\mysql\bin\mysqldump.exe -u admin -p123 --all-databases > C:\xampp\kopia_%data%.sql
+
+ECHO.
+ECHO ==========================================
+ECHO Kopia wykonana poprawnie: kopia_%data%.sql
+ECHO ==========================================
+TIMEOUT /T 60
+```
+
 17. Stwórz z pomocą **harmonogramu** i skryptu kopię, zaplanuj jej
-    cykliczność o zadanych godzinach i dniach.( np. każdego dnia o
-    godzinie kiedy masz ćwiczenia z wyjątkiem niedzieli )
-18. Sprawdź poprawność przywrócenia.
+    cykliczność co 5 minut ale tylko w dniu ćwiczeń
+![ogolne.png](media/ogolne.png)
+18. Zaczekaj na wykonanie kopii
+![cmd_widok_kopii.png](media/cmd_widok_kopii.png)
+19. Sprawdź poprawność przywrócenia.
+![eksplorator.png](media/eksplorator.png)
 
 ---
 
