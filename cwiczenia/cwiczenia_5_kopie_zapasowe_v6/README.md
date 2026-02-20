@@ -31,8 +31,13 @@ b)  Bazę danych z jedną tabelą metodą dostosuj do formatu .**SQL** i
 c)  Trzecią z wiersza poleceń za pomocą
     **mysqldump, mariadb-dump**  
    ( porównaj wielkości kopii tworzonych opcjami: 
+ Z xampp uruchom shell, a nastepnie:
+```bash
+ mysqldump --help
+```
    - c, i ,v, l, a, x oraz z opcjami skip\--...)
-
+   - d --no-data
+   - t --no-create-info
  ![](media/image4.png)
  ![](media/image5.png)
 
