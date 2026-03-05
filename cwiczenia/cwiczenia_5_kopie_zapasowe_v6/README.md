@@ -171,13 +171,39 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 ```
 33. Stwórz bazę danych z jedną tabelą i 3 rekordami danych. 
 34. Z pomocą mariadb-dump wykonaj kopię bazy w katalogu `~/twoje_imię`. 
+   ```bash
+   mkdir ~/twoje_imię
+   mariadb-dump -u root -phasło nazwa_bazy > ~/twoje_imię/kopia_nazwa_bazy.sql
+   ```
 35. Sprawdź wyświetlanie daty i czasu komendą date
+   ```bash
+   date +%Y-%m-%d_%H_%M_%S
+   ```
 36. Utwórz skrypt, który wykona kopię twojej bazy do pliku `backup.sql`
+   ```bash
+  echo "🚀 Rozpoczynam kopię zapasową kontenera $CONTAINER_NAME..."
+  
+  mariadb-dump -u root -p123 nazwa_bazy > backup.sql 
+   ```
 37. Sprawdź komendę kompresji dla kopii poleceniem tar.
 38. Popraw skrypt, tak aby w nazwie pliku kopii znalazła się data i czas
     jej wykonania, a następnie utwórz archiwum tar.bz2. 
+   ```bash
+   DB_USER="root"
+   DB_PASS="123" 
+   DATE=$(date +%Y-%m-%d_%H_%M_%S)
+  
+  echo "🚀 Rozpoczynam kopię zapasową kontenera $CONTAINER_NAME..."
+  
+  mariadb-dump -u "$DB_USER" -p"$DB_PASS" nazwa_bazy > nazwa_bazy_$DATE.sql 
+  tar cvfj nazwa_bazy_$DATE.tar.bz2 nazwa_bazy_$DATE.sql 
+   ```
 39. Stwórz z pomocą **CRONTABA** i skryptu kopię, zaplanuj jej
-    cykliczność o zadanych godzinach i dniach. 
+    cykliczność o zadanych godzinach i dniach.
+   ```bash
+   crontab -l
+   crontab -e
+   ```
 40. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
     wszyscy wykonują kopię zdalnie i odtwarzają bazę na swoich
     komputerach.
