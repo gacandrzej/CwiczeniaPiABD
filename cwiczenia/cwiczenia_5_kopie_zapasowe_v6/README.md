@@ -193,9 +193,9 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
    DB_PASS="123" 
    DATE=$(date +%Y-%m-%d_%H_%M_%S)
   
-  echo "🚀 Rozpoczynam kopię zapasową kontenera $CONTAINER_NAME..."
-  
+  echo "🚀 Rozpoczynam kopię zapasową ..."
   mariadb-dump -u "$DB_USER" -p"$DB_PASS" nazwa_bazy > nazwa_bazy_$DATE.sql 
+  echo "kopia zapasowa wykonana poprawnie"
   tar cvfj nazwa_bazy_$DATE.tar.bz2 nazwa_bazy_$DATE.sql 
    ```
 39. Stwórz z pomocą **CRONTABA** i skryptu kopię, zaplanuj jej
