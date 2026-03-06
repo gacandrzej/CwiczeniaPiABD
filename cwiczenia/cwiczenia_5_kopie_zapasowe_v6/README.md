@@ -177,6 +177,19 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
    dalej entery
    ```
 
+1. Dodaj swoje konto do grupy `sudo`
+
+   ```bash
+   sudo adduser twoje_imię sudo 
+   exit
+   ```
+
+1. Zaloguj się na trzech terminalach:
+
+   ```bash
+    Alt+F2, Alt+F3, ...
+   ```
+
 1. Na stacji Ubuntu Server zainstaluj oprogramowanie bazy danych
     mariadb:
 
