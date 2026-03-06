@@ -167,7 +167,17 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 | data_sprzedazy | DATE       |                |          | rrrr-MM-dd                          |
 | producent      | VARCHAR    |    NOT NULL    |         | długość 45                           |
 
-1. Na stacji Ubuntu Desktop zainstaluj oprogramowanie bazy danych
+1. Zaloguj się na serwerze ubuntu na konto administrator z hasłem `ZAQ!2wsx`
+1. Utwórz sobie konto
+
+   ```bash
+   sudo adduser twoje_imię
+   podaj hasło administrator
+   podaj hasło do swojego konta 
+   dalej entery
+   ```
+
+1. Na stacji Ubuntu Server zainstaluj oprogramowanie bazy danych
     mariadb:
 
    ```bash
@@ -206,6 +216,15 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
    ```
 
 1. Utwórz skrypt, który wykona kopię twojej bazy do pliku `backup.sql`
+
+   ```bash
+   touch skrypt.sh 
+   mcedit skrypt.sh 
+   lub 
+   mc, a następnie Shift+F4 
+   ```
+
+   Edycja skryptu:
 
    ```bash
    echo "🚀 Rozpoczynam kopię zapasową ..."
