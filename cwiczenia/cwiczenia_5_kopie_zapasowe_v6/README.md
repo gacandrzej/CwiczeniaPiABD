@@ -274,6 +274,17 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
    crontab -e
    ```
 
+1. W domu możesz na windows w power shell wydać komendę:
+
+   <https://learn.microsoft.com/en-us/windows/wsl/install>
+
+   ```bash
+   wsl --install
+   ```
+
+   Potem restart komputera.
+   Następnie microsoft store i wybrać ubuntu.
+
 1. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
     wszyscy wykonują kopię zdalnie i odtwarzają bazę na swoich
     komputerach.
