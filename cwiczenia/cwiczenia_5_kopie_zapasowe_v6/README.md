@@ -296,7 +296,8 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 
    Potem restart komputera.
    Następnie microsoft store i wybrać ubuntu.
-   ![image_win](media/image_win.png)
+   ![win11_wsl_ubuntu](media/win11_wsl_ubuntu.png)
+
 1. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
     wszyscy wykonują kopię zdalnie i odtwarzają bazę na swoich
     komputerach.
