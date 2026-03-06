@@ -274,6 +274,18 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
    crontab -e
    ```
 
+   Wpisać za _czas uruchomienia, co dwie minuty_/2
+
+   ```bash
+   */2 * * * * bash /home/twoje_imię/skrypt_backup.sh
+   ```
+
+1. Na koniec zajęć:
+
+   ```bash
+   sudo poweroff
+   ```
+
 1. W domu możesz na windows w power shell wydać komendę:
 
    <https://learn.microsoft.com/en-us/windows/wsl/install>
@@ -284,7 +296,7 @@ mysqldump -u admin2 -p123 twoja_baza < kopia_%data%.sql
 
    Potem restart komputera.
    Następnie microsoft store i wybrać ubuntu.
-
+   ![image_win](media/image_win.png)
 1. Wykonać kopię lokalną bazy hurtownia dla nauczyciela, następnie
     wszyscy wykonują kopię zdalnie i odtwarzają bazę na swoich
     komputerach.
