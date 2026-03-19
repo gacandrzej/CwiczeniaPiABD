@@ -143,13 +143,47 @@
 
 1. Koniec części 2.
 
+1. Otwórz dokumentację:
 
+   <https://mariadb.com/docs/server/reference/sql-statements/table-statements/repair-table>
 
+   <https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimizing-tables/optimize-table>
 
+   <https://mariadb.com/docs/server/reference/sql-statements/table-statements/analyze-table>
 
-14. Wykonaj reindeksację tabeli towary.(ANALYZE...
-15. Wykonaj defragmentację tabeli towary. ( OPTIMIZE ...
-16. Wykonaj sprawdzenie ( CHECK ...
-17. Dokonaj naprawy ( REPAIR ...
-18. Wykonaj w phpMyAdmin i Shellu operacje dla tabeli towary:
-![](media/image4.png)
+1. Wykonaj reindeksację tabeli towary, np.:
+
+   ```SQL
+   ANALYZE TABLE `towary`;
+   ```
+
+1. Wykonaj defragmentację tabeli towary, np.:
+
+   ```SQL
+   OPTIMIZE TABLE `towary`;
+   ```
+
+1. Wykonaj sprawdzenie spójności. Służy do weryfikacji,
+   czy struktura tabeli i jej dane nie uległy uszkodzeniu, np.:
+
+   ```SQL
+   CHECK TABLE `towary`;
+   ```
+
+1. Dokonaj naprawy, np.:
+
+   ```SQL
+   REPAIR TABLE `towary`;
+   ```
+
+   Rekomendowana metoda dla InnoDB (przebudowa tabeli):
+
+   ```SQL
+   ALTER TABLE `towary` ENGINE='InnoDB';
+   ```
+
+1. Wykonaj w phpMyAdmin i Shellu operacje dla tabeli towary:
+
+   ![media4](media/image4.png)
+
+1. Koniec części 3.
