@@ -207,7 +207,17 @@
 
    --repair
 
+   ```bash
+   mariadb-check -u root -p --analyze --optimize --check --auto-repair nazwa_bazy_danych
+   ```
+
    ![image5](media/image5.png)
+
+1. Wykonaj sprawdzenie i autonaprawę:
+
+   ```bash
+   mariadb-check -u root -p --check --auto-repair nazwa_bazy_danych
+   ```
 
 1. Wykonaj autonaprawę wszystkich baz połączoną z optymalizacją, np.:
 
