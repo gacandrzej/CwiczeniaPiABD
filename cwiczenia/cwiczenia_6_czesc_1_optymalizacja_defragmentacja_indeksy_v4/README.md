@@ -1,6 +1,17 @@
 # Ćwiczenia 6 część 1 -- optymalizacja, defragmentacja, indeksy
 
 1. Uruchomić Apache i MySql.
+
+1. Otwórz dokumentację:
+
+   <https://mariadb.com/docs/server/reference/sql-statements/data-definition/create/create-index>
+
+   <https://mariadb.com/docs/server/reference/sql-statements/data-definition/alter/alter-table>
+
+   <https://mariadb.com/docs/server/reference/sql-statements/data-definition/drop/drop-index>
+
+   <https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-index>
+
 1. Zaimportuj bazę sklep z .
 
    ```SQL
