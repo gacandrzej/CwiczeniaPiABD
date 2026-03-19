@@ -173,7 +173,13 @@
 1. Dokonaj naprawy, np.:
 
    ```SQL
-   REPAIR ...
+   REPAIR TABLE `towary`;
+   ```
+
+   Rekomendowana metoda dla InnoDB (przebudowa tabeli):
+
+   ```SQL
+   ALTER TABLE `towary` ENGINE='InnoDB';
    ```
 
 1. Wykonaj w phpMyAdmin i Shellu operacje dla tabeli towary:
