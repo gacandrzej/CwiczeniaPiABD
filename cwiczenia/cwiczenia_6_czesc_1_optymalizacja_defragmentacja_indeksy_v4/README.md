@@ -1,8 +1,31 @@
 # Ćwiczenia 6 część 1 -- optymalizacja, defragmentacja, indeksy
 
 1. Uruchomić Apache i MySql.
-2. Zaimportuj bazę sklep z .
-3. Z pomocą phpMyAdmin (sprawdzaj podgląd SQL):
+1. Zaimportuj bazę sklep z .
+
+   ```SQL
+   CREATE DATABASE IF NOT EXISTS `sklep`
+   ```
+
+   ```SQL
+   CREATE TABLE `towary` (
+
+    `lp` int(11) NOT NULL,
+    `nazwa` varchar(20) NOT NULL,
+    `producent` text NOT NULL,
+    `data_sprzedazy` date NOT NULL,
+    `cena` decimal(10,2) NOT NULL,
+    `waga` double(255,2) NOT NULL
+
+   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+   ```
+
+   ```SQL
+   INSERT INTO `towary` (`lp`, `nazwa`, `producent`, `data_sprzedazy`, `cena`, `waga`) VALUES (1, 'chleb', 'Piekarnia 1', '2026-03-19', '12.55', 1.30)
+
+   ```
+
+1. Z pomocą phpMyAdmin (sprawdzaj podgląd SQL):
 
    ![image1](media/image1.png)
 
@@ -25,11 +48,11 @@
    g)  utwórz indeks przestrzenny dla tabeli punkty, kolumna kształt typ
     geometry (wstawić dane do jednego rekordu wsk. ST_GeomFromText... )
 
-   h)  ![](media/image2.png)
-    ![](media/image3.png)
+   h)  ![image2](media/image2.png)
+    ![image3](media/image3.png)
 
    i)  przejrzyj utworzone indeksy i wykonaj kopię bazy
 
    j)  usuń wszystkie utworzone indeksy
 
-4. Koniec części 1.
+1. Koniec części 1.
