@@ -68,27 +68,77 @@
 
 1. Koniec części 1.
 
+1. Z pomocą shella i programu mysql lub mariadb:
 
+   a)  Stwórz indeksy, które utworzyłeś w phpMyAdmin dla tabeli towary.
 
-<!-- -->
-4.  Z pomocą shella i programu mysql:
-<!-- -->
-a)  Stwórz indeksy, które utworzyłeś w phpMyAdmin dla tabeli towary.
-b)  ( np. CREATE INDEX idx_waga ON towary(waga);
-c)  lub z sortowaniem CREATE INDEX idx_waga ON towary(waga DESC); )
-d)  indeksy złożone ( np. CREATE INDEX idx_NC ON towary(nazwa,cena); )
-<!-- -->
-5.  Przejrzyj stworzone indeksy.( SHOW INDEX FROM towary;)
-6.  Wydaj komendę SHOW CREATE TABLE towary; (aby zobaczyć utworzone
-    indeksy.)
-7.  Usuń jeden indeks prosty I jeden złożony (np. ALTER TABLE towary
-    DROP INDEX idx_NC;)
-8.  Wykonaj zapytanie SELECT \* FROM towary WHERE cena=10000;
-9.  Podejrzeć, który indeks będzie użyty EXPLAIN SELECT \* FROM towary
-    WHERE cena=10000;
-10. Wykonaj podpunkty 8,9 dla klauzuli WHERE na pozostałych polach, dla
+   - indeksy proste, np.:
+
+   ```SQL
+   CREATE INDEX idx_waga ON towary(waga);
+   ```
+
+   - lub z sortowaniem:
+
+   ```SQL
+   CREATE INDEX idx_waga ON towary(waga DESC); )
+   ```
+
+   b)  indeksy złożone, np.:
+
+   ```SQL
+   CREATE INDEX idx_NC ON towary(nazwa,cena);
+   ```
+
+1. Przejrzyj stworzone indeksy:
+
+   ```SQL
+   SHOW INDEX FROM towary;
+   ```
+
+1. Aby zobaczyć stworzone indeksy wydaj komendę:
+
+   ```SQL
+   SHOW CREATE TABLE towary; 
+   ```
+
+1. Usuń jeden indeks prosty i jeden złożony, np.:
+
+   ```SQL
+   ALTER TABLE towary DROP INDEX idx_NC;
+   ```
+
+1. Wykonaj zapytanie:
+
+   ```SQL
+   SELECT * FROM towary WHERE cena=10000;
+   ```
+
+1. Podejrzeć, który indeks będzie użyty:
+
+   ```SQL
+   EXPLAIN SELECT * FROM towary WHERE cena=10000;
+   ```
+
+1. Wykonaj podpunkty 8,9 dla klauzuli `WHERE` na pozostałych polach, dla
     których stworzyłeś indeksy.
-11. Wydaj komendę SHOW profiles;
-12. Wykonaj powyższe polecenia z opcją LIMIT. (np. SELECT \* FROM towary
-    WHERE cena=10000 LIMIT 1;)
-13. Sprawdź czasy wykonania SHOW profiles;
+
+1. Wydaj komendę:
+
+   ```SQL
+   SHOW profiles;
+   ```
+
+1. Wykonaj powyższe polecenia z opcją LIMIT, np.:
+
+   ```SQL
+   SELECT * FROM towary WHERE cena=10000 LIMIT 1;
+   ```
+
+1. Sprawdź czasy wykonania:
+
+   ```SQL
+   SHOW profiles;
+   ```
+
+1. Koniec części 2.
