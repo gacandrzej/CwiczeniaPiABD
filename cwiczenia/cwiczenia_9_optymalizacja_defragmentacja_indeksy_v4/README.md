@@ -247,10 +247,100 @@
         database: "dane"
     });
 
+   con.connect(function(err) {
+    if (err) throw err;
+
+    console.log("Połączono z bazą danych.");
+
+    // UWAGA: Zapytanie CREATE TABLE wykonujemy bezpośrednio po połączeniu
+    // Jeśli tabela już istnieje, to się nie wykona (możesz dodać IF NOT EXISTS)
+    con.query("CREATE TABLE IF NOT EXISTS punkty(x INT, y INT, z INT);", function(err, result) {
+        if (err) throw err;
+        console.log("Tabela 'punkty' jest gotowa.");
+
+        var inserts = 1000000;
+        var queriesExecuted = 0;
+
+        function afterInsert(err, result) {
+            if (err) {
+                console.error("Błąd podczas wstawiania:", err);
+            }
+            queriesExecuted++;
+
+            // Zamykamy połączenie TYLKO po wykonaniu wszystkich 1000000 zapytań INSERT
+            if (queriesExecuted === inserts) {
+                console.log(`Wszystkie ${inserts} punkty zostały wstawione. Zamykam połączenie.`);
+                con.end();
+            }
+        }
+
+        // Pętla do wstawiania danych
+        for (var i = 0; i < inserts; i++) {
+            var x = randomInt(100000);
+            var y = randomInt(100000);
+            var z = randomInt(100000);
+
+            con.query(`INSERT INTO punkty (x, y, z) VALUES(${x},${y},${z});`, afterInsert);
+        }
+
+    }); // Koniec callbacku dla CREATE TABLE
+
+   }); // Koniec callbacku dla con.connect()
+
    ```
 
 1. Przetestuj indeksy na tej bazie na 1,2 i 3 kolumnach.
+   Wybieramy konkretne wartości (np. x=5, y=10, z=15), które na pewno istnieją lub są prawdopodobne.
+
+   - Test bez indeksu
+
+   ```SQL
+   -- Włączamy mierzenie czasu w konsoli MariaDB
+   SET profiling = 1;
+
+   SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
+
+   SHOW PROFILE;
+   ```
+
+   - Test z indeksem na 1 kolumnie (X)
+
+   ```SQL
+   CREATE INDEX idx_x ON punkty(x);
+
+   SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
+
+   SHOW PROFILE;
+   DROP INDEX idx_x ON punkty;
+   ```
+
+   - Test z indeksem na 2 kolumnach (X, Y)
+
+   ```SQL
+   CREATE INDEX idx_xy ON punkty(x, y);
+
+   SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
+
+   SHOW PROFILE;
+   DROP INDEX idx_xy ON punkty;
+   ```
+
+   - Test z indeksem na 3 kolumnach (X, Y, Z)
+
+   ```SQL
+   CREATE INDEX idx_xyz ON punkty(x, y, z);
+
+   SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
+
+   SHOW PROFILE;
+   ```
 
 1. Porównaj wyniki.
+
+   | Typ Testu | Co robi MariaDB? | Przewidywany Czas |
+   |:-----------:|:-------------------|:--------------------:|
+   | Brak indeksu | Przegląda każdy z 1 000 000 wierszy po kolei. |  ~250 ms|
+   | Indeks (X) | Wybiera np. 1000 wierszy gdzie X=5, a potem ręcznie sprawdza w nich Y i Z. | ~5-20 ms |
+   | Indeks (X, Y, Z) | Idzie prosto do celu | < 1 ms |
 
 1. KONIEC.🔚
