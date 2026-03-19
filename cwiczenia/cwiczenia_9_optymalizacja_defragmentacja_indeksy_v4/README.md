@@ -31,6 +31,14 @@
    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
    ```
 
+    ```SQL
+   ALTER TABLE `towary` ADD PRIMARY KEY (`lp`);
+   ```
+
+   ```SQL
+   ALTER TABLE `towary` MODIFY `lp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+   ```
+
    ```SQL
    INSERT INTO `towary` (`lp`, `nazwa`, `producent`, `data_sprzedazy`, `cena`, `waga`) VALUES (1, 'chleb', 'Piekarnia 1', '2026-03-19', '12.55', 1.30)
 
