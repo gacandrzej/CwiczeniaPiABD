@@ -188,16 +188,47 @@
 
 1. Koniec części 3.
 
-19. Z pomocą programu mysqlcheck wykonaj dla tabeli towary w bazie
-    sklep: analizę, sprawdzenie, optymalizację i naprawę. ( \--optimize,
-    \--check, \--analyze, \--repair)
-![](media/image5.png)
-20. Wykonaj autonaprawę wszystkich baz połączoną z optymalizacją.(
-    \--auto-repair ...\--optimize
-21. Wykonaj kopię zapasową.
-22. Usuń stworzone indeksy. ( DROP INDEX ...
-23. Dodatkowo napisz skrypt, który utworzy bazę o nazwie dane z jedną
+1. Z pomocą programu mysqlcheck wykonaj dla tabeli towary w bazie
+    sklep: analizę, sprawdzenie, optymalizację i naprawę.
+
+   --optimize,
+
+   --check,
+
+   --analyze,
+
+   --repair
+
+   ![image5](media/image5.png)
+
+1. Wykonaj autonaprawę wszystkich baz połączoną z optymalizacją, np.:
+
+    --auto-repair ...--optimize
+
+1. Wykonaj kopię zapasową narzędziem mariadb-dump.
+
+   ```bash
+   mariadb-dump -u admin -phaslo nazwa_bazy > kopia.sql 
+   ```
+
+1. Usuń stworzone indeksy:
+
+   ```SQL
+   DROP INDEX 
+   ```
+
+1. Dodatkowo napisz skrypt w JS, który utworzy bazę o nazwie dane z jedną
     tabelą o nazwie punkty zawierającą współrzędne punktów w przestrzeni
-    ( czyli 3 kolumny X,Y,Z). Ilość rekordów 1 mln.
-24. Przetestuj indeksy na tej bazie na 1,2 i 3 kolumnach. Porównaj
-    wyniki.
+    ( czyli 3 kolumny X,Y,Z).
+
+   Ilość rekordów 1 mln.
+
+   ```bash
+
+   ```
+
+1. Przetestuj indeksy na tej bazie na 1,2 i 3 kolumnach.
+
+1. Porównaj wyniki.
+
+1. KONIEC.🔚
