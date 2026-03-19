@@ -229,9 +229,23 @@
     tabelą o nazwie punkty zawierającą współrzędne punktów w przestrzeni
     ( czyli 3 kolumny X,Y,Z).
 
-   Ilość rekordów 1 mln.
+   ```SQL
+   CREATE TABLE IF NOT EXISTS punkty(x INT, y INT, z INT);
+   ```
+
+   Ilość rekordów 1 mln., fragment początkowy skryptu:
 
    ```bash
+   const { randomInt } = require('crypto');
+
+    const mysql = require('mysql');
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "twoje_konto",
+        password: "*********** twoje hasło ****************",
+        database: "dane"
+    });
 
    ```
 
