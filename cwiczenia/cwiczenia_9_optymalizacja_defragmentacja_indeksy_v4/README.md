@@ -540,6 +540,26 @@
     +------+-------------+--------+------+---------------+---------+---------+-------------------+------+-------------+
     ```
 
+    Sprawdzenie rozmiaru danych i indeksów:
+
+     ```sql
+      SELECT
+          table_name AS 'Tabela',
+          ROUND(data_length / 1024 / 1024, 2) AS 'Dane (MB)',
+          ROUND(index_length / 1024 / 1024, 2) AS 'Indeksy (MB)'
+      FROM information_schema.TABLES
+      WHERE table_schema = 'dane';"
+      ```
+
+      ```text
+      Enter password:
+      +--------+-----------+--------------+
+      | Tabela | Dane (MB) | Indeksy (MB) |
+      +--------+-----------+--------------+
+      | punkty |     38.58 |       139.31 |
+      +--------+-----------+--------------+
+      ```
+
     ```sql
     DROP INDEX idx_xyz ON punkty;
     ```
