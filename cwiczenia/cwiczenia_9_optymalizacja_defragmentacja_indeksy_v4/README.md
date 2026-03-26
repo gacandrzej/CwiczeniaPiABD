@@ -313,7 +313,23 @@
    SHOW PROFILE;
    ```
 
-   - Test z indeksem na 1 kolumnie (X)
+   ```sql
+   EXPLAIN SELECT *FROM punkty WHERE x = 10 AND y = 20 AND z = 30;
+   ```
+
+    ```text
+        Enter password:
+
+    +------+-------------+--------+------+---------------+------+---------+------+--------+-------------+
+    | id   | select_type | table  | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
+    +------+-------------+--------+------+---------------+------+---------+------+--------+-------------+
+    |    1 | SIMPLE      | punkty | ALL  | NULL          | NULL | NULL    | NULL | 997920 | Using where |
+    +------+-------------+--------+------+---------------+------+---------+------+--------+-------------+
+    ```
+
+    type: ALL, co oznacza pełne skanowanie ~ miliona wierszy
+
+- Test z indeksem na 1 kolumnie (X)
 
    ```SQL
    CREATE INDEX idx_x ON punkty(x);
@@ -321,10 +337,66 @@
    SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
 
    SHOW PROFILE;
+   ```
+
+   ```text
+      Enter password:
+
+    +------+------+------+
+    | x    | y    | z    |
+    +------+------+------+
+    |    5 |   10 |   15 |
+    +------+------+------+
+    +------------------------+----------+
+    | Status                 | Duration |
+    +------------------------+----------+
+    | Starting               | 0.000028 |
+    | checking permissions   | 0.000003 |
+    | Opening tables         | 0.000011 |
+    | After opening tables   | 0.000006 |
+    | System lock            | 0.000003 |
+    | table lock             | 0.000004 |
+    | init                   | 0.000020 |
+    | Optimizing             | 0.000014 |
+    | Statistics             | 0.000044 |
+    | Preparing              | 0.000019 |
+    | Executing              | 0.000002 |
+    | Sending data           | 0.011711 |
+    | End of update loop     | 0.000004 |
+    | Query end              | 0.000002 |
+    | Commit                 | 0.000002 |
+    | Query end              | 0.000002 |
+    | closing tables         | 0.000002 |
+    | Unlocking tables       | 0.000001 |
+    | closing tables         | 0.000003 |
+    | Query end              | 0.000003 |
+    | Starting cleanup       | 0.000001 |
+    | Freeing items          | 0.000004 |
+    | Updating status        | 0.000007 |
+    | Reset for next command | 0.000002 |
+    +------------------------+----------+
+
+   ```
+
+    **Sprawdzamy Sending data: 0.011711**
+
+   ```sql
+   EXPLAIN SELECT *FROM punkty WHERE x = 10 AND y = 20 AND z = 30;
+   ```
+
+   ```text
+   +------+-------------+--------+------+---------------+-------+---------+-------+-------+-------------+
+   | id   | select_type | table  | type | possible_keys | key   | key_len | ref   | rows  | Extra       |
+   +------+-------------+--------+------+---------------+-------+---------+-------+-------+-------------+
+   |    1 | SIMPLE      | punkty | ref  | idx_x         | idx_x | 5       | const | 19742 | Using where |
+   +------+-------------+--------+------+---------------+-------+---------+-------+-------+-------------+
+   ```
+
+   ```sql
    DROP INDEX idx_x ON punkty;
    ```
 
-   - Test z indeksem na 2 kolumnach (X, Y)
+- Test z indeksem na 2 kolumnach (X, Y)
 
    ```SQL
    CREATE INDEX idx_xy ON punkty(x, y);
@@ -332,10 +404,72 @@
    SELECT * FROM punkty WHERE x = 5 AND y = 10 AND z = 15;
 
    SHOW PROFILE;
-   DROP INDEX idx_xy ON punkty;
    ```
 
-   - Test z indeksem na 3 kolumnach (X, Y, Z)
+   ```text
+      Enter password:
+
+    +------+------+------+
+    | x    | y    | z    |
+    +------+------+------+
+    |    5 |   10 |   15 |
+    +------+------+------+
+    +------------------------+----------+
+    | Status                 | Duration |
+    +------------------------+----------+
+    | Starting               | 0.000023 |
+    | checking permissions   | 0.000003 |
+    | Opening tables         | 0.000118 |
+    | After opening tables   | 0.000003 |
+    | System lock            | 0.000003 |
+    | table lock             | 0.000004 |
+    | Opening tables         | 0.000008 |
+    | After opening tables   | 0.000003 |
+    | System lock            | 0.000002 |
+    | table lock             | 0.000013 |
+    | Unlocking tables       | 0.000003 |
+    | closing tables         | 0.000006 |
+    | init                   | 0.000018 |
+    | Optimizing             | 0.000014 |
+    | Statistics             | 0.000036 |
+    | Preparing              | 0.000017 |
+    | Executing              | 0.000002 |
+    | Sending data           | 0.000323 |
+    | End of update loop     | 0.000004 |
+    | Query end              | 0.000002 |
+    | Commit                 | 0.000002 |
+    | Query end              | 0.000002 |
+    | closing tables         | 0.000002 |
+    | Unlocking tables       | 0.000001 |
+    | closing tables         | 0.000002 |
+    | Query end              | 0.000002 |
+    | Starting cleanup       | 0.000001 |
+    | Freeing items          | 0.000003 |
+    | Updating status        | 0.000006 |
+    | Reset for next command | 0.000002 |
+    +------------------------+----------+
+
+   ```
+
+    ```sql
+    EXPLAIN SELECT *FROM punkty WHERE x = 10 AND y = 20 AND z = 30;"
+    ```
+
+    ```text
+
+    Enter password:
+    +------+-------------+--------+------+---------------+--------+---------+-------------+------+-------------+
+    | id   | select_type | table  | type | possible_keys | key    | key_len | ref         | rows | Extra       |
+    +------+-------------+--------+------+---------------+--------+---------+-------------+------+-------------+
+    |    1 | SIMPLE      | punkty | ref  | idx_xy        | idx_xy | 10      | const,const | 91   | Using where |
+    +------+-------------+--------+------+---------------+--------+---------+-------------+------+-------------+
+    ```
+
+    ```sql
+    DROP INDEX idx_xy ON punkty;
+    ```
+
+- Test z indeksem na 3 kolumnach (X, Y, Z)
 
    ```SQL
    CREATE INDEX idx_xyz ON punkty(x, y, z);
@@ -344,6 +478,71 @@
 
    SHOW PROFILE;
    ```
+
+    ```text
+
+    Enter password:
+    +------+------+------+
+    | x    | y    | z    |
+    +------+------+------+
+    |    5 |   10 |   15 |
+    +------+------+------+
+    +------------------------+----------+
+    | Status                 | Duration |
+    +------------------------+----------+
+    | Starting               | 0.000029 |
+    | checking permissions   | 0.000003 |
+    | Opening tables         | 0.000129 |
+    | After opening tables   | 0.000004 |
+    | System lock            | 0.000003 |
+    | table lock             | 0.000004 |
+    | Opening tables         | 0.000008 |
+    | After opening tables   | 0.000002 |
+    | System lock            | 0.000002 |
+    | table lock             | 0.000013 |
+    | Unlocking tables       | 0.000003 |
+    | closing tables         | 0.000006 |
+    | init                   | 0.000019 |
+    | Optimizing             | 0.000014 |
+    | Statistics             | 0.000057 |
+    | Preparing              | 0.000039 |
+    | Executing              | 0.000002 |
+    | Sending data           | 0.000020 |
+    | End of update loop     | 0.000003 |
+    | Query end              | 0.000002 |
+    | Commit                 | 0.000003 |
+    | Query end              | 0.000002 |
+    | closing tables         | 0.000002 |
+    | Unlocking tables       | 0.000002 |
+    | closing tables         | 0.000002 |
+    | Query end              | 0.000002 |
+    | Starting cleanup       | 0.000002 |
+    | Freeing items          | 0.000004 |
+    | Updating status        | 0.000008 |
+    | Reset for next command | 0.000002 |
+    +------------------------+----------+
+
+    ```
+
+    **Sending data : 0.000020**
+
+    ```sql
+    EXPLAIN SELECT *FROM punkty WHERE x = 10 AND y = 20 AND z = 30;"
+    ```
+
+    ```text
+        Enter password:
+
+    +------+-------------+--------+------+---------------+---------+---------+-------------------+------+-------------+
+    | id   | select_type | table  | type | possible_keys | key     | key_len | ref               | rows | Extra       |
+    +------+-------------+--------+------+---------------+---------+---------+-------------------+------+-------------+
+    |    1 | SIMPLE      | punkty | ref  | idx_xyz       | idx_xyz | 15      | const,const,const | 4    | Using index |
+    +------+-------------+--------+------+---------------+---------+---------+-------------------+------+-------------+
+    ```
+
+    ```sql
+    DROP INDEX idx_xyz ON punkty;
+    ```
 
 1. Porównaj wyniki.
 
