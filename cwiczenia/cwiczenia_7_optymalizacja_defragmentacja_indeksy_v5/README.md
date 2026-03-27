@@ -134,6 +134,7 @@
 1. Wydaj komendę:
 
    ```SQL
+   SET profiling = 1;
    SHOW profiles;
    ```
 

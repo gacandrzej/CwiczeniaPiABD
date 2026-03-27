@@ -134,6 +134,7 @@
 1. Wydaj komendę:
 
    ```SQL
+   SET profiling = 1;
    SHOW profiles;
    ```
 
@@ -257,46 +258,42 @@
         database: "dane"
     });
 
-   con.connect(function(err) {
-    if (err) throw err;
+      con.connect(function(err) {
+        if (err) throw err;
 
-    console.log("Połączono z bazą danych.");
+        console.log("Połączono z bazą danych.");
 
-    // UWAGA: Zapytanie CREATE TABLE wykonujemy bezpośrednio po połączeniu
-    // Jeśli tabela już istnieje, to się nie wykona (możesz dodać IF NOT EXISTS)
     con.query("CREATE TABLE IF NOT EXISTS punkty(x INT, y INT, z INT);", function(err, result) {
         if (err) throw err;
-        console.log("Tabela 'punkty' jest gotowa.");
+        
+        const total = 1000000;
+        const batchSize = 10000; // Wstawiamy po 10k rekordów na raz
+        let inserted = 0;
 
-        var inserts = 1000000;
-        var queriesExecuted = 0;
-
-        function afterInsert(err, result) {
-            if (err) {
-                console.error("Błąd podczas wstawiania:", err);
-            }
-            queriesExecuted++;
-
-            // Zamykamy połączenie TYLKO po wykonaniu wszystkich 1000000 zapytań INSERT
-            if (queriesExecuted === inserts) {
-                console.log(`Wszystkie ${inserts} punkty zostały wstawione. Zamykam połączenie.`);
+        function insertBatch() {
+            if (inserted >= total) {
+                console.log("Gotowe!");
                 con.end();
+                return;
             }
+
+            let values = [];
+            for (let i = 0; i < batchSize; i++) {
+                values.push([randomInt(100), randomInt(100), randomInt(100)]);
+            }
+
+            con.query("INSERT INTO punkty (x, y, z) VALUES ?", [values], function(err) {
+                if (err) throw err;
+                inserted += batchSize;
+                console.log(`Postęp: ${inserted}/${total}`);
+                insertBatch();
+            });
         }
 
-        // Pętla do wstawiania danych
-        for (var i = 0; i < inserts; i++) {
-            var x = randomInt(100000);
-            var y = randomInt(100000);
-            var z = randomInt(100000);
-
-            con.query(`INSERT INTO punkty (x, y, z) VALUES(${x},${y},${z});`, afterInsert);
-        }
+        insertBatch();
 
     }); // Koniec callbacku dla CREATE TABLE
-
-   }); // Koniec callbacku dla con.connect()
-
+    }); // Koniec callbacku dla con.connect()
    ```
 
 1. Przetestuj indeksy na tej bazie na 1,2 i 3 kolumnach.
@@ -556,7 +553,7 @@
       +--------+-----------+--------------+
       | Tabela | Dane (MB) | Indeksy (MB) |
       +--------+-----------+--------------+
-      | punkty |     38.58 |       139.31 |
+      | punkty |     38.58 |       69.31 |
       +--------+-----------+--------------+
       ```
 
