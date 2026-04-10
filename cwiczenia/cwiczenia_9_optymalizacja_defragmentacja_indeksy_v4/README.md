@@ -191,7 +191,7 @@
    ALTER TABLE `towary` ENGINE='InnoDB';
    ```
 
-1. Wykonaj w phpMyAdmin i Shellu operacje dla tabeli towary:
+1. Wykonaj w phpMyAdmin, zaznacz tabelę -> zakładka operacje i Shellu operacje dla tabeli towary:
 
    ![media4](media/image4.png)
 
@@ -202,11 +202,19 @@
 
    --optimize,
 
+   ![optimize](media/mysqlcheck_optimize.png)
+
    --check,
+
+   ![check](media/mysqlcheck_check.png)
 
    --analyze,
 
-   --repair
+   ![analyze](media/mysqlcheck_analyze.png)
+
+   --auto-repair
+
+   ![repair](media/mysqlcheck_autorepair.png)
 
    ```bash
    mariadb-check -u root -p --analyze --optimize --check --auto-repair nazwa_bazy_danych
