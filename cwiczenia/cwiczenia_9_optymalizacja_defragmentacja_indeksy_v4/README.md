@@ -92,6 +92,18 @@
    CREATE INDEX idx_waga ON towary(waga DESC); )
    ```
 
+   - index z HASH
+
+   ```bash
+   create unique index idx_cena using hash on towary(cena);
+   ```
+
+   - textfull z komentarzem
+
+   ```bash
+   create fulltext index idx_nazwa on towary(nazwa) comment 'komentarz';
+   ```
+
    b)  indeksy złożone, np.:
 
    ```SQL
@@ -104,6 +116,8 @@
    SHOW INDEX FROM towary;
    ```
 
+   ![show_index](../../media/2026-04-16-11-02-24.png)
+
 1. Aby zobaczyć stworzone indeksy wydaj komendę:
 
    ```SQL
@@ -114,6 +128,12 @@
 
    ```SQL
    ALTER TABLE towary DROP INDEX idx_NC;
+   ```
+
+1. Usuwanie indexu komendą DROP
+
+   ```bash
+   drop index idx_cena on towary;
    ```
 
 1. Wykonaj zapytanie:
