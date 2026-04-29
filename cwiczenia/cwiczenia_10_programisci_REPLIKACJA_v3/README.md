@@ -58,8 +58,16 @@
 1. Sprawdź w phpMyAdmin w zakładce STATUS procesy i stan serwera.
 
 1. Wykonaj kopię zapasową 3 baz z opcją --master-data do pliku
-   kopia.sql. Skopiuj plik na drugi komputer z pomocą serwera FTP
+   kopia.sql.
+   Skopiuj plik na drugi komputer z pomocą serwera FTP
    zawartego w XAMPP.
+
+   FilleZilla start i kliknij admin
+
+   W nowym oknie dodaj Shared folders, np .: c:\ftp
+   oraz konto użytkownika ftp, podaj swoje imię.
+
+   ![widok_ftp](../../media/2026-04-29-11-43-22.png)
 
 1. Na drugim komputerze skonfiguruj serwer podrzędny.
 
