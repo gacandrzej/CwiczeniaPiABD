@@ -69,6 +69,10 @@
 
    ![widok_ftp](../../media/2026-04-29-11-43-22.png)
 
+1. Na serwerze podrzędnym połącz się z pomocą WinScp i skopiuj plik backup.sql
+
+   ![client_ftp](../../media/2026-04-29-11-51-15.png)
+
 1. Na drugim komputerze skonfiguruj serwer podrzędny.
 
 1. Odtwórz dane z pliku kopia.sql.
