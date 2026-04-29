@@ -75,6 +75,16 @@
 
 1. Na drugim komputerze skonfiguruj serwer podrzędny.
 
+   ![widok_podrz1](../../media/2026-04-29-12-17-16.png)
+
+   ![widok_podrz2](../../media/2026-04-29-12-19-03.png)
+
+1. Stan replikacji + procesy.
+
+   ![replik1](../../media/2026-04-29-12-20-33.png)
+
+   ![replik2](../../media/2026-04-29-12-21-16.png)
+
 1. Odtwórz dane z pliku kopia.sql.
 
 1. Otwórz plik my.ini
@@ -93,7 +103,7 @@
    Sprawdź poprawność konta do replikacji:
 
    ```bash
-   mysql --u replik -p
+   mysql -u replik -p -h 192.168.100.x 
    ```
 
 1. Jeśli można się zalogować, to przełącz się na konto Root.
@@ -156,5 +166,27 @@
     openssl x509 -req -in client-req.pem -days 730 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.pem
     openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
    ```
+
+1. SSL po stronie server master
+
+   ```sql
+   show variables like '%ssl%';
+   ```
+
+   ![ssl_master](../../media/2026-04-29-12-24-18.png)
+
+   ![ssl_accept_master](../../media/2026-04-29-12-26-39.png)
+1. Założenie konta dla połączeń ssl:
+
+   ```sql
+   GRANT REPLICATION SLAVE ON *.* TO 'admin_rep'@'192.168.30.100' IDENTIFIED BY PASSWORD '*23AE809DDACAF96AF0FD78ED04B6A265E05AA257' REQUIRE SSL;
+   ```
+
+1. Sprawdzenie szyfrowanego połączenia na windows , serwer podrzędny:
+
+   ![cipher_slave](../../media/2026-04-29-12-29-01.png)
+1. Sprawdzenie konfiguracji na serwerze podrzędnym:
+
+   ![oczekiwanie_ssl](../../media/2026-04-29-12-30-16.png)
 
 1. KONIEC.🔚
